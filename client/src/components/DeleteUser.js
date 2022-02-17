@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { getUsersQuery, deleteUserMutation } from "../queries/queries";
+import { getUsersQuery, deleteUserMutation,getProductsQuery } from "../queries/queries";
 
 const AddProduct = (props) => {
   const [users, setUsers] = useState([]);
@@ -10,7 +10,7 @@ const AddProduct = (props) => {
   const [mutateFunction, { mutateData, load, err }] = useMutation(
     deleteUserMutation,
     {
-      refetchQueries: [{ query: getUsersQuery }],
+      refetchQueries: [{ query: getUsersQuery },{ query: getProductsQuery }],
     }
   );
 

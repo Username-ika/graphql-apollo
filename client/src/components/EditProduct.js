@@ -21,15 +21,18 @@ const EditProduct = (props) => {
   const [mutateFunction, { mutateData, load, err }] = useMutation(
     editProductMutation,
     {
-      refetchQueries: [{ query: getProductsQuery }],
+      refetchQueries: [
+        { query: getProductsQuery },
+        { query: getProductQuery, variables: { id: product.productId } },
+      ],
     }
   );
 
-  const [getProduct, { loading, error, data, refetch }] =
+  const [getProduct, { loading, data}] =
     useLazyQuery(getProductQuery);
 
   const setFields = () => {
-    if (data && data.product && data.product.id !== product.productId) {
+    if (data && data.product ) {
       setProduct({
         productId: data.product.id,
         name: data.product.name,
@@ -37,7 +40,6 @@ const EditProduct = (props) => {
         description: data.product.description,
         img: data.product.img,
       });
-      console.log(JSON.stringify(data.product) + "esdataa");
     }
   };
 
@@ -83,8 +85,6 @@ const EditProduct = (props) => {
           img: product.img,
         },
       });
-      getProduct({ variables: { id: e.target.value } });
-      console.log("submit")
     }
   };
 

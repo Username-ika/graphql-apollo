@@ -20,22 +20,23 @@ const EditUser = (props) => {
   const [mutateFunction, { mutateData, load, err }] = useMutation(
     editUserMutation,
     {
-      refetchQueries: [{ query: getUsersQuery }],
+      refetchQueries: [
+        { query: getUsersQuery },
+        { query: getUserQuery, variables: { id: user.userId } },
+      ],
     }
   );
 
   const [getUser, { loading, data }] = useLazyQuery(getUserQuery);
-  
 
   const setFields = () => {
-    if (data && data.user && data.user.id !== user.userId) {
+    if (data && data.user ) {
       setUser({
         userId: data.user.id,
         name: data.user.name,
         age: data.user.age,
         phone: data.user.phone,
       });
-      console.log(JSON.stringify(data.user)+"esdataa")
     }
   };
 
@@ -70,7 +71,7 @@ const EditUser = (props) => {
       user.userId !== "" &&
       user.name !== "" &&
       user.age !== "" &&
-      user.phone !== "" 
+      user.phone !== ""
     ) {
       mutateFunction({
         variables: {
@@ -80,10 +81,7 @@ const EditUser = (props) => {
           phone: user.phone,
         },
       });
-      getUser({ variables: { id: e.target.value } })
     }
-
-   
   };
 
   return (
