@@ -66,7 +66,6 @@ const EditUser = (props) => {
   };
   const submitForm = async (e) => {
     e.preventDefault();
-
     if (
       user.userId !== "" &&
       user.name !== "" &&

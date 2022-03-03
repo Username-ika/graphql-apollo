@@ -85,8 +85,8 @@ const Mutation = new GraphQLObjectType({
       type: UserType,
       args: {
         name: { type: new GraphQLNonNull(GraphQLString) },
-        age: { type: new GraphQLNonNull(GraphQLInt)},
-        phone: { type: new GraphQLNonNull(GraphQLString)},
+        age: { type: new GraphQLNonNull(GraphQLInt) },
+        phone: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve(parent, args) {
         let user = new User({
@@ -120,7 +120,7 @@ const Mutation = new GraphQLObjectType({
     deleteUser: {
       type: UserType,
       args: {
-        id: { type: GraphQLID},
+        id: { type: GraphQLID },
       },
       async resolve(parent, args) {
         await User.findByIdAndDelete(args.id);
@@ -140,10 +140,10 @@ const Mutation = new GraphQLObjectType({
     editUser: {
       type: UserType,
       args: {
-        id: { type: new GraphQLNonNull(GraphQLID)},
-        name: { type: new GraphQLNonNull(GraphQLString) },
-        age: { type: new GraphQLNonNull(GraphQLInt) },
-        phone: { type: new GraphQLNonNull(GraphQLString) },
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        age: { type: GraphQLInt },
+        phone: { type: GraphQLString },
       },
       async resolve(parent, args) {
         await User.updateOne(
@@ -160,11 +160,11 @@ const Mutation = new GraphQLObjectType({
     editProduct: {
       type: ProductType,
       args: {
-        id: { type: new GraphQLNonNull(GraphQLID)},
-        name: { type: new GraphQLNonNull(GraphQLString) },
-        price: { type: new GraphQLNonNull(GraphQLInt) },
-        description: { type: new GraphQLNonNull(GraphQLString) },
-        img: { type: new GraphQLNonNull(GraphQLString) },
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        price: { type: GraphQLInt },
+        description: { type: GraphQLString },
+        img: { type: GraphQLString },
       },
       async resolve(parent, args) {
         await Product.updateOne(
